@@ -1,0 +1,52 @@
+
+     body{
+     padding-top:1px;
+     background-color: black;
+     }
+
+
+    table {
+      width: 100%;
+    }
+
+    th {
+     height: 200px;
+    }
+
+    .container{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 30vh;
+      flex-wrap: wrap;
+    }
+
+     #msg1, #msg2{
+
+      background-color: black;
+      color: green;
+      width: 100%;
+      flex: 1;
+    }
+
+    #myCheck{
+      width:100px;
+    }
+
+    .outergauge {
+      width: 300px;
+      float: center;
+      height: 200px;
+      margin: 0 auto;
+      background-color: black;
+          }
+
+    .outerbullets {
+      width: 300px;
+      float: center;
+      height: 200px;
+      margin: 0 auto;
+      background-color: black;
+    }
+
+

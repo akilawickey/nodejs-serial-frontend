@@ -1,7 +1,7 @@
 /*
 NODE js library handler to get data from serial ports and push them to the websockets and display in GUI
 */
-
+var keypress = require('keypress');
 var express = require("express");
 var app = express();
 var http = require('http').Server(app);
@@ -9,8 +9,8 @@ var path = __dirname + '/';
 var io = require('socket.io')(http);
 var router = express.Router();
 var SerialPort = require('serialport'); /*Serial Port Intitiate*/
-var port = new SerialPort("/dev/ttyUSB0", {
-  baudrate: 9600,
+var port = new SerialPort("/dev/ttyACM0", {
+  baudRate: 115200,
   bufferSize: 1 ,
   rtscts: true ,
 });
@@ -22,16 +22,19 @@ var flag_V = 0; /*Validation Flag*/
 
 /*Socket IO*/
 router.use("/",function(req,res){
-  res.sendFile(path + "index.html");
+  console.log (req.url);
+  res.sendFile(path + req.url);
 });
 app.use("/",router);
 app.use(express.static(__dirname + '/public'));
 
 port.on('data', function (data) {
-  if(flag_V == 0) validateData(data) ;
-  else{
+          console.log(data);
+//  if(flag_V == 0) validateData(data) ;
+  //else{
   	str += data;
-  	if(data == "!"){ 	
+
+  	if(str.includes("!")){
   		myPrint(str);
   		count = 0;
   		io.emit('chat message', str);	//send msg to web interface.
@@ -39,9 +42,9 @@ port.on('data', function (data) {
   		flag_V = 0;
   		no_pkt++;
   		console.log("data number :" + no_pkt);
-  	} 	
+  	}
   	count++;
-  }
+  //}
 
 });
 
@@ -69,7 +72,7 @@ http.listen(3000, function(){
 
 function myPrint(data) {
 	var i;
- 	console.log('Data: ' + data);
+ 	//console.log('Data: ' + data);
 }
 // this function will validate data
 function validateData(x){
@@ -77,7 +80,19 @@ function validateData(x){
 		port.flush();
 	}else if( x == "#"){
 		flag_V=1;
-		console.log("Validated");
+		//console.log("Validated");
 	}
 }
+
+// make `process.stdin` begin emitting "keypress" events
+keypress(process.stdin);
+
+// listen for the "keypress" event
+process.stdin.on('keypress', function (ch, key) {
+  console.log('got "keypress"', key);
+  io.close(); // Close current server
+  return process.exit("blaaa");
+});
+
+process.stdin.setRawMode(true);
 

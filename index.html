@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Serial Data Plot </title>
+
+    <script src="../offline/socket.io-1.2.0.js"></script>
+
+    <script src="../options/gauges.js"></script>
+
+    <script src="../highcharts-dist-master/highcharts.js"></script>
+    <script src="../highcharts-dist-master/highcharts-more.js"></script>
+    <script src="../highcharts-dist-master/modules/solid-gauge.js"></script>
+    <script src="../highcharts-dist-master/modules/bullet.js"></script>
+    <script src="../offline/jquery.min.js"></script>
+    <script src="../offline/bootstrap.min.js"></script>
+    <script src="../process.js"></script>
+
+    <link rel="stylesheet" href="../app.css">
+
+  </head>
+  <body >
+   <!-- Tabs -->
+    <main class= container>
+
+            <div id="container1" class="outergauge"></div>
+            <div id="container2" class="outergauge"></div>
+            <div id="container3" class="outergauge"></div>
+    </main>
+    <main class= container>
+
+
+            <div id="container4" class="outerbullets"></div>
+            <div id="container5" class="outerbullets"></div>
+            <div id="container6" class="outerbullets"></div>
+            <div id="container7" class="outerbullets"></div>
+    </main>
+    <main class= container>
+
+
+
+
+            <div id="container8" class="outerbullets"></div>
+            <div id="container9" class="outerbullets"></div>
+
+    </main>
+    <main class= container>
+
+          <div><textarea rows="20"  id="msg1"> </textarea></div>
+          <div><input type="checkbox" id="myCheck" onclick="swapTextArea()"></div>
+          <div><textarea rows="20" id="msg2"> </textarea></div>
+
+
+    </main>
+
+    <script type="text/javascript">
+
+    // var battery = Highcharts.chart('battery_chart', batteryOptions);
+    var chartRpm = Highcharts.chart('container1', Highcharts.merge(gaugeOptions, rpmOptions));
+    var chartVoltPct = Highcharts.chart('container2', Highcharts.merge(gaugeOptions, pctOptions));
+    var chartMotorAmps = Highcharts.chart('container3', Highcharts.merge(gaugeOptions, mAmpsOptions));
+    var chartBatteryAmps = Highcharts.chart('container4', Highcharts.merge(bulletOptions, bAmpsOptions));
+    var chartThrottlePct = Highcharts.chart('container5', Highcharts.merge(bulletOptions, throttleOptions));
+    var chartId = Highcharts.chart('container6', Highcharts.merge(bulletOptions, IdOptions));
+    var chartIq = Highcharts.chart('container7', Highcharts.merge(bulletOptions, IqOptions));
+    var chartIdRef = Highcharts.chart('container8', Highcharts.merge(bulletOptions, IqRefOptions));
+    var chartIqRef = Highcharts.chart('container9', Highcharts.merge(bulletOptions, IqRefOptions));
+//  unsigned int dataToDisplaySet1;
+  // 0bit 15 set: display myDataStream.timer
+  // 1Bit 14 set: display myDataStream.Id_times10
+  // 1bit 13 set: display myDataStream.Iq_times10
+  // 1Bit 12 set: display myDataStream.IdRef_times10
+  // 1bit 11 set: display myDataStream.IqRef_times10
+  // 1Bit 10 set: display myDataStream.Vd
+  // 1bit 9 set: display myDataStream.Vq
+  // 1Bit 8 set: display myDataStream.Ia_times10
+  // 1bit 7 set: display myDataStream.Ib_times10
+  // 1bit 6 set: display myDataStream.Ic_times10
+  // 1Bit 5 set: display myDataStream.Va
+  // 1bit 4 set: display myDataStream.Vb
+  // 1bit 3 set: display myDataStream.Vc
+  // 1bit 2 set: display myDataStream.percentOfVoltageDiskBeingUsed
+  // 1bit 1 set: display myDataStream.batteryAmps_times10
+  // 0bit 0 set: future use
+  //  unsigned int dataToDisplaySet2;
+  // 1Bit 15 set: display myDataStream.rawThrottle
+  // 1bit 14 set: display myDataStream.throttle
+  // 0Bit 13 set: display myDataStream.temperature
+  // 1bit 12 set: display myDataStream.slipSpeedRPM
+  // 1Bit 11 set: display myDataStream.electricalSpeedRPM
+  // 1bit 10 set: display myDataStream.mechanicalSpeedRPM
+  // 1bit 9 set: display poscnt
+  // 0Bit 8-0 set: future use.
+
+
+    </script>
+  </body>
+</html>
+
+
